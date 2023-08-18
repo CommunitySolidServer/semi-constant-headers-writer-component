@@ -48,8 +48,8 @@
       "@id": "urn:semi-constant-headers-writer:default:SemiConstantHeadersWriter",
       "headers": [
         {
-          "SemiConstantHeadersWriter:headers_key": "https://w3id.org/ldes#EventStream",
-          "SemiConstantHeadersWriter:headers_value": "{storageRoot}ldesinldp"
+          "SemiConstantHeadersWriter:_headers_key": "Link",
+          "SemiConstantHeadersWriter:_headers_value": "<{storageRoot}ldesinldp>; rel=\"https://w3id.org/ldes#EventStream\""
         }
       ]
     }
