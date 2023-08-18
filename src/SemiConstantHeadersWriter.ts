@@ -1,9 +1,9 @@
 import {
   addHeader,
   createErrorMessage,
-  getLoggerFor,
+  getLoggerFor, LDP,
   MetadataWriter,
-  MetadataWriterInput,
+  MetadataWriterInput, RDF,
   ResourceIdentifier,
   StorageLocationStrategy
 } from "@solid/community-server";
@@ -25,6 +25,11 @@ export class SemiConstantHeadersWriter extends MetadataWriter {
   }
 
   public async handle(input: MetadataWriterInput): Promise<void> {
+    // This indicates this is the response of a successful GET/HEAD request
+    if (!input.metadata.has(RDF.terms.type, LDP.terms.Resource)) {
+      return;
+    }
+
     // Get necessary replacement values.
     const storageRoot = await this.getStorageRoot({path: input.metadata.identifier.value});
 
