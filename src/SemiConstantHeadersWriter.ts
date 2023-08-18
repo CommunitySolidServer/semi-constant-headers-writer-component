@@ -25,26 +25,31 @@ export class SemiConstantHeadersWriter extends MetadataWriter {
   }
 
   public async handle(input: MetadataWriterInput): Promise<void> {
+    // Get necessary replacement values.
     const storageRoot = await this.getStorageRoot({path: input.metadata.identifier.value});
+
+    // Go through all headers, replace placeholders and add them to the response.
     for (let [key, value] of this.headers) {
+      // storageRoot placeholder
       if (value.includes('{storageRoot}')) {
         if (storageRoot) {
           value = value.replace('{storageRoot}', storageRoot.path);
         } else {
+          // Skip this header if it contains the storageRoot placeholder and the storage root could not be found.
           continue;
         }
       }
+
+      // Add header if all placeholders have been replaced successfully.
       addHeader(input.response, key, value);
     }
-    return Promise.resolve(undefined);
   }
 
-  private getStorageRoot(identifier: ResourceIdentifier): Promise<ResourceIdentifier | undefined> {
+  private getStorageRoot(identifier: ResourceIdentifier): Promise<ResourceIdentifier> | undefined {
     try {
       return this.storageStrategy.getStorageIdentifier(identifier);
     } catch (error: unknown) {
       this.logger.error(`Unable to find storage root: ${createErrorMessage(error)}`);
-      return Promise.resolve(undefined);
     }
   }
 
