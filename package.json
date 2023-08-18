@@ -4,7 +4,7 @@
   "description": "A component for the Community Solid Server that allows to add several semi constant headers.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "lsd:module": "https://linkedsoftwaredependencies.org/bundles/npm/hello-world-module",
+  "lsd:module": "https://linkedsoftwaredependencies.org/bundles/npm/semi-constant-headers-writer-component",
   "lsd:components": "dist/components/components.jsonld",
   "lsd:contexts": {
     "https://linkedsoftwaredependencies.org/bundles/npm/semi-constant-headers-writer-component/^1.0.0/components/context.jsonld": "dist/components/context.jsonld"
@@ -15,9 +15,9 @@
     "https://linkedsoftwaredependencies.org/bundles/npm/semi-constant-headers-writer-component/^1.0.0/dist/": "dist/"
   },
   "scripts": {
-    "start": "community-solid-server -c hello-world-file.json -f .data -m .",
+    "start": "community-solid-server -c semi-constant-headers-writer-file.json -f .data -m .",
     "build": "npm run build:ts && npm run build:components",
-    "build:components": "componentsjs-generator -s src -c dist/components -i .componentsignore -r hello-world",
+    "build:components": "componentsjs-generator -s src -c dist/components -i .componentsignore -r semi-constant-headers-writer",
     "build:ts": "tsc",
     "prepare": "npm run build",
     "test": "jest"
