@@ -4,9 +4,9 @@
     "https://linkedsoftwaredependencies.org/bundles/npm/semi-constant-headers-writer-component/^1.0.0/components/context.jsonld"
   ],
   "import": [
-    "css:config/app/main/default.json",
     "css:config/app/init/default.json",
-    "css:config/app/setup/required.json",
+    "css:config/app/main/default.json",
+    "css:config/app/setup/disabled.json",
     "css:config/app/variables/default.json",
     "css:config/http/handler/default.json",
     "css:config/http/middleware/default.json",
@@ -41,6 +41,17 @@
   "@graph": [
     {
       "comment": "A single-pod server that stores its resources on disk (with setup)."
+    },
+    {
+      "comment": "Adds several semi constant headers.",
+      "@type": "SemiConstantHeadersWriter",
+      "@id": "urn:semi-constant-headers-writer:default:SemiConstantHeadersWriter",
+      "headers": [
+        {
+          "SemiConstantHeadersWriter:headers_key": "https://w3id.org/ldes#EventStream",
+          "SemiConstantHeadersWriter:headers_value": "{storageRoot}ldesinldp"
+        }
+      ]
     }
   ]
 }
