@@ -1,11 +1,24 @@
 {
-  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/semi-constant-headers-writer-component/^1.0.0/components/context.jsonld",
+  "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^6.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/semi-constant-headers-writer-component/^1.0.0/components/context.jsonld"
+  ],
   "@graph": [
     {
       "comment": "Adds several semi constant headers.",
       "@type": "SemiConstantHeadersWriter",
       "@id": "urn:semi-constant-headers-writer:default:SemiConstantHeadersWriter",
+      "storageStrategy": { "@id": "urn:solid-server:default:StorageLocationStrategy" },
       "headers": []
+    },
+    {
+      "@id": "urn:solid-server:default:MetadataWriter",
+      "@type": "ParallelHandler",
+      "handlers": [
+        {
+          "@id": "urn:semi-constant-headers-writer:default:SemiConstantHeadersWriter"
+        }
+      ]
     }
   ]
 }
