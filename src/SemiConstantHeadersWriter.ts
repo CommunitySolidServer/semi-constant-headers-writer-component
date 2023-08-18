@@ -1,5 +1,7 @@
 import {
-  addHeader, createErrorMessage, getLoggerFor,
+  addHeader,
+  createErrorMessage,
+  getLoggerFor,
   MetadataWriter,
   MetadataWriterInput,
   ResourceIdentifier,
@@ -25,8 +27,12 @@ export class SemiConstantHeadersWriter extends MetadataWriter {
   public async handle(input: MetadataWriterInput): Promise<void> {
     const storageRoot = await this.getStorageRoot({path: input.metadata.identifier.value});
     for (let [key, value] of this.headers) {
-      if (storageRoot) {
-        value = value.replace('{storageRoot}', storageRoot.path);
+      if (value.includes('{storageRoot}')) {
+        if (storageRoot) {
+          value = value.replace('{storageRoot}', storageRoot.path);
+        } else {
+          continue;
+        }
       }
       addHeader(input.response, key, value);
     }
